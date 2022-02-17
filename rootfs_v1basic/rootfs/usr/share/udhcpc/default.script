@@ -1,0 +1,70 @@
+#!/bin/sh
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+
+RESOLV_CONF="/tmp/resolv.conf"
+
+update_interface()
+{
+  [ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+  [ -n "$subnet" ] && NETMASK="netmask $subnet"
+  /sbin/ifconfig $interface $ip $BROADCAST $NETMASK
+}
+
+update_routes()
+{
+  if [ -n "$router" ]
+  then
+    echo "deleting routes"
+    while /sbin/route del default gw 0.0.0.0 dev $interface
+    do :
+    done
+
+    for i in $router
+    do
+      /sbin/route add default gw $i dev $interface
+    done
+  fi
+}
+
+update_dns()
+{
+  echo -n > $RESOLV_CONF
+  [ -n "$domain" ] && echo domain $domain >> $RESOLV_CONF
+  for i in $dns
+  do
+    echo adding dns $i
+    echo nameserver $i >> $RESOLV_CONF
+  done
+}
+
+deconfig()
+{
+  /sbin/ifconfig $interface 0.0.0.0
+}
+
+case "$1" in
+  bound)
+    update_interface;
+    update_routes;
+    update_dns;
+  ;;
+
+  renew)
+    update_interface;
+    update_routes;
+    update_dns;
+  ;;
+
+  deconfig)
+    deconfig;
+  ;;
+
+  *)
+    echo "Usage: $0 {bound|renew|deconfig}"
+    exit 1
+    ;;
+esac
+
+exit 0
+

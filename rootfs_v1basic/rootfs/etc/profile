@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+
+#echo "Processing /etc/profile... "
+# no-op
+
+# Set search library path and user path
+LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
+PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
+export LD_LIBRARY_PATH PATH
+
+#host name
+USER="`id -un`"
+LOGNAME=$USER
+HOSTNAME='/bin/hostname'
+export USER LOGNAME HOSTNAME
+
+#alias
+alias ll="ls -al"
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# prompt Set PS1
+#export PS1="\\e[05;32m[$USER@\\w\\a]\\$\\e[00;34m"
+export PS1='[\u@\h \w]$ '
+echo "You are in control now !!"
+
+#export TSLIB_TSDEVICE='/dev/input/event2'
+#export TSLIB_CONFFILE='/etc/ts.conf'
+#export TSLIB_PLUGINDIR='/lib/ts'
+#export TSLIB_FBDEVICE='/dev/fb0'
+#export TSLIB_CALIBFILE='/etc/pointercal'
+

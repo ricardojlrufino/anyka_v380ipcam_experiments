@@ -1,0 +1,24 @@
+#! /bin/sh
+
+echo "mount all file system..."
+mkdir /dev/pts
+/bin/mount -av
+
+runlevel=S
+prevlevel=N
+umask 022
+export runlevel prevlevel
+
+echo "starting mdev..."
+/bin/echo /sbin/mdev > /proc/sys/kernel/hotplug
+mdev -s
+
+mkdir /var/cache
+mkdir /var/run
+mkdir /var/log
+mkdir /var/spool
+
+/bin/hostname -F /etc/sysconfig/HOSTNAME
+
+#local service
+/etc/init.d/rc.local

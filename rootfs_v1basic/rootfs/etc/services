@@ -1,0 +1,16 @@
+# Network services, Internet style
+
+tcpmux  1/tcp     # TCP port service multiplexer
+tcpmux  1/udp
+ftp-data    20/tcp
+ftp     21/tcp
+ssh     22/tcp    # SSH Remote Login Protocol
+ssh     22/udp
+telnet  23/tcp
+nameserver  42/tcp  name  # IEN 116
+
+#
+# linux specific services
+#
+syslog  514/udp
+
