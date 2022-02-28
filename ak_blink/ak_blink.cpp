@@ -1,3 +1,10 @@
+/**
+ * Arduino Style Blink
+ * by Ricardo JL Rufino
+ * More info:
+ * https://ricardojlrufino.wordpress.com/2022/02/14/hack-ipcam-anyka-teardown-and-root-access/
+ */
+
 #include "platform/Arduino.h"
 
 volatile sig_atomic_t stop;
