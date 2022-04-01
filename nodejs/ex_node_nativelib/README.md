@@ -8,17 +8,7 @@ This repository serves as a nearly minimal native extension built on [Nan](https
 
 ## Building
 
-To compile the extension for the first time, run 
-
-```
-$ npm i
-$ npm run configure
-$ npm run build
-```
-
-All subsequent builds only need `npm run build`
-
-You can confirm everything built correctly by [running the test suite](#to-run-tests).
+To compile the extension use `build.sh` script
 
 ### Working With the Extension Locally
 

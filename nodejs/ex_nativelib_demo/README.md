@@ -10,3 +10,6 @@ The only dependency needed is (../nodejs/ex_node_nativelib/node_modules/bindings
 To RUN copy this folder to device and run using:
 
 node test-native.js
+
+More details in:
+https://ricardojlrufino.wordpress.com/2022/03/02/hack-ipcam-anyka-cross-compile-nodejs-and-call-native-code
