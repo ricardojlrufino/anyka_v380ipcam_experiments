@@ -11,7 +11,7 @@
 typedef struct snapshot_t{
 
   int count;
-  uint8_t ready; // bool
+  pthread_cond_t ready; // bool
   uint8_t capture; // bool
 
 } snapshot_t;

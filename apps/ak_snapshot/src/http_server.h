@@ -22,6 +22,9 @@
 #define FORBIDDEN 403
 #define NOTFOUND  404
 
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+
+int server_fd;
 
 struct {
   char *ext;
@@ -117,14 +120,15 @@ void web(int fd, int hit)
   // Example: http://192.168.15.57:3000/any.bmp
   if(!strcmp(fstr, "image/bmp")){
 
-	snapshot_http->ready =  0;
+	//snapshot_http->ready = 0;
+	pthread_cond_init(&snapshot_http->ready, NULL);
 	snapshot_http->capture = 1;
 
-	// wait main thread
-	while(!snapshot_http->ready){
-	  usleep(250);
-	  logw("Wait capture...");
-	}
+	pthread_mutex_lock(&lock);
+	logw("Wait capture...");
+	pthread_cond_wait(&snapshot_http->ready, &lock);
+	pthread_mutex_unlock(&lock);
+
 
 	// TODO: IMPLEMENT WRITE/READ IN MEMORY !
 	if(( file_fd = open("/tmp/preview.bmp",O_RDONLY)) == -1) {  /* open the file for reading */
@@ -182,7 +186,7 @@ void *accept_thread(void *server_fd)
 }
 
 int start_server(int port, char *webdir, snapshot_t *snapshot){
-	int i, pid, server_fd;
+	int i, pid;
 
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 	snapshot_http = snapshot;
@@ -214,3 +218,9 @@ int start_server(int port, char *webdir, snapshot_t *snapshot){
 	return 0;
 }
 
+
+void stop_server(){
+
+	close(server_fd);
+
+}

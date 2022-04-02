@@ -56,7 +56,7 @@ uint8_t * qr_buf;
 
 struct snapshot_t snapshot_ref = {
 	.count = 0,
-	.ready = 0,
+	.ready = NULL,
 	.capture = 0
 };
 
@@ -64,7 +64,7 @@ void stop_capture();
 
 
 void my_handler(int s){
-   printf("Caught signal %d\n",s);
+   printf("Caught signal %d - Exiting... \n",s);
    stop=1;
    usleep(200);
    exit(1);
@@ -92,6 +92,8 @@ void stop_capture(){
 	ak_vi_capture_off(vi_handle);
 
 	ak_vi_close(vi_handle);
+
+	stop_server();
 
 }
 
@@ -222,8 +224,9 @@ void debug_capture(unsigned char *rawimg, unsigned int len){
 		usleep(250); // wait to write
 		snapshot_ref.count++;
 		snapshot_ref.capture = 0;
-		snapshot_ref.ready = 1;
+		pthread_cond_signal(&snapshot_ref.ready);
 	}
+
 
 	#endif
 
