@@ -1,20 +1,6 @@
-sample snapshot using http server
+Blog: https://ricardojlrufino.wordpress.com/2022/04/03/hack-ipcam-anyka-oled-display-on-cam/
 
+## Preview
 
-## Usage
+![Preview](https://ricardojlrufino.files.wordpress.com/2022/04/image-7.png "Preview") 
 
-`./ak_snapshot`
-
-*Access in Browser*
-
-http://192.168.1.XXX:3000/snapshot.bmp
-
-
-## Compiling
-
-Run: `./build.sh`
-
-
-## TODO
-
-Improove code quality and cleanup
