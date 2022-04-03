@@ -1,11 +1,12 @@
 /***************************************************************************//**
 *  \file       driver_bus.c
 *
-*  \details    Simple I2C Bus driver explanation
+*  \details    Simple I2C Bus driver using GPIO
 *
-*  \author     EmbeTronicX
+*  \author     EmbeTronicX , Ricardo JL Rufino
 *
 *  \Tested with Linux raspberrypi 5.4.51-v7l+
+*  \Tested with Linux Anyka Linux 3.4.35 (by Ricardo JL Rufino)
 *
 * *******************************************************************************/
 #include <linux/module.h>
