@@ -1,0 +1,9 @@
+config I2C_SSD1306_FB
+tristate "I2C_SSD1306 Framebuffer driver"
+depends on ARM
+default y if ARM
+select FB_CFB_IMAGEBLIT
+select FB_CFB_COPYAREA
+select FB_CFB_FILLRECT
+help
+  my driver module.
