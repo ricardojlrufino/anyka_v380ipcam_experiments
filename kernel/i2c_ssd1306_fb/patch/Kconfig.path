@@ -1,0 +1,12 @@
+diff --git a/src/kernel/drivers/i2c/busses/Kconfig b/src/kernel/drivers/i2c/busses/Kconfig
+index af663a88..d9838ac3 100644
+--- a/src/kernel/drivers/i2c/busses/Kconfig
++++ b/src/kernel/drivers/i2c/busses/Kconfig
+@@ -937,4 +937,7 @@ config SCx200_ACB
+ 	  This support is also available as a module.  If so, the module
+ 	  will be called scx200_acb.
+ 
++
++source "drivers/i2c/busses/ssd1306fb/Kconfig"
++
+ endmenu

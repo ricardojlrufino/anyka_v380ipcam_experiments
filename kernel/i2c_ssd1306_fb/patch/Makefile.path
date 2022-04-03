@@ -1,0 +1,12 @@
+diff --git a/src/kernel/drivers/i2c/busses/Makefile b/src/kernel/drivers/i2c/busses/Makefile
+index 969fdc8b..7826f1c7 100644
+--- a/src/kernel/drivers/i2c/busses/Makefile
++++ b/src/kernel/drivers/i2c/busses/Makefile
+@@ -4,6 +4,7 @@
+ 
+ # ACPI drivers
+ obj-$(CONFIG_I2C_SCMI)		+= i2c-scmi.o
++obj-$(CONFIG_I2C_SSD1306_FB)		+= ssd1306fb/
+ 
+ # PC SMBus host controller drivers
+ obj-$(CONFIG_I2C_ALI1535)	+= i2c-ali1535.o
