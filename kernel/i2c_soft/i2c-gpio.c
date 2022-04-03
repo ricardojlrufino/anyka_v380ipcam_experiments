@@ -173,7 +173,7 @@ static struct i2c_adapter etx_i2c_adapter = {
   .class      = I2C_CLASS_HWMON | I2C_CLASS_SPD,
   .name       = ADAPTER_NAME,
   .algo_data  = &etx_bit_data,
-  .nr         = 5,
+  .nr         = 1, // busID 
 };
 
 
