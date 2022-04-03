@@ -101,6 +101,15 @@ static int ETX_I2C_Init( void )
           ret = -1;
           break;
     }
+
+
+
+    struct gpio_info gpio;
+    gpio.pulldown = -1;
+    gpio.pullup = -1;
+    gpio.dir = AK_GPIO_DIR_OUTPUT;
+    gpio.int_pol = AK_GPIO_INT_DISABLE;
+
     
     /*
     ** configure the SCL GPIO as output, We will change the 
@@ -108,8 +117,11 @@ static int ETX_I2C_Init( void )
     */
     // gpio_direction_output(SCL_GPIO, 1);
 
-    ak_gpio_dircfg(SCL_GPIO, AK_GPIO_DIR_OUTPUT);
-    ak_gpio_setpin(SCL_GPIO, 1);
+    //ak_gpio_dircfg(SCL_GPIO, AK_GPIO_DIR_OUTPUT);
+    //ak_gpio_setpin(SCL_GPIO, 1);
+    gpio.pin = SCL_GPIO;
+    gpio.value = 1;
+    ak_gpio_set(&gpio);
 
 
     /*
@@ -118,8 +130,12 @@ static int ETX_I2C_Init( void )
     */
     //gpio_direction_output(SDA_GPIO, 1);
 
-    ak_gpio_dircfg(SDA_GPIO, AK_GPIO_DIR_OUTPUT);
-    ak_gpio_setpin(SDA_GPIO, 1);
+    //ak_gpio_dircfg(SDA_GPIO, AK_GPIO_DIR_OUTPUT);
+    //ak_gpio_setpin(SDA_GPIO, 1);
+
+    gpio.pin = SDA_GPIO;
+    gpio.value = 1;
+    ak_gpio_set(&gpio);
 
 
   } while(false);
@@ -168,10 +184,9 @@ static int __init etx_driver_init(void)
 {
   int ret = -1;
 
-  printk(KERN_ERR "i2c_gpio_soft_init 1 \n");   
+  printk(KERN_ERR "i2c_gpio_soft_init SDA=%d , SCL=%d \n", SDA_GPIO, SCL_GPIO);   
   ETX_I2C_Init();
 
-      printk(KERN_ERR "i2c_gpio_soft_init 2 \n");
   ret = i2c_bit_add_numbered_bus(&etx_i2c_adapter);
 
   pr_info("Bus Driver Added!!!\n");
